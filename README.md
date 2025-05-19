@@ -83,6 +83,160 @@ Check out a few resources that may come in handy when working with NestJS:
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
+## File Structure
+
+src/
+├── auth/
+├── users/
+├── products/
+├── categories/
+├── cart/
+├── orders/
+├── payments/
+├── shipping/
+├── reviews/
+├── wishlist/
+├── admin/
+├── notifications/
+├── discounts/
+├── analytics/
+├── common/ # shared utilities, pipes, filters
+├── database/ # TypeORM/Prisma setup and migrations
+└── main.ts
+
+## E-Commerce Backend Modules (NestJS + PostgreSQL)
+
+This backend is modularized using NestJS to support scalability and maintainability. Below is a breakdown of the core and optional modules used in this application.
+
+🧩 1. Auth Module
+Handles user authentication and authorization.
+
+JWT-based login & registration
+
+Password hashing with bcrypt
+
+Role-based access control
+
+Guards & token validation
+
+👤 2. User Module
+Manages user profiles and roles.
+
+View and update profile
+
+Admin-level user management
+
+Role assignment
+
+📦 3. Product Module
+Manages product catalog and inventory.
+
+CRUD for products
+
+Upload & manage images
+
+Price, stock, and description handling
+
+🗂️ 4. Category Module
+Organizes products into hierarchical categories.
+
+CRUD for categories
+
+Parent-child relationships
+
+Product categorization
+
+🛒 5. Cart Module
+Handles user shopping cart operations.
+
+Add, update, remove items
+
+Session-based or user-specific carts
+
+Quantity and price tracking
+
+📦 6. Order Module
+Processes and tracks customer orders.
+
+Order creation from cart
+
+Order status tracking
+
+Return and cancellation management
+
+💳 7. Payment Module
+Integrates payment gateways and records transactions.
+
+Integration with Stripe, PayPal, etc.
+
+Payment confirmation and tracking
+
+Refund handling
+
+🚚 8. Shipping Module
+Manages shipping details and delivery tracking.
+
+Shipping address management
+
+Shipping methods
+
+Order shipment status
+
+⭐ 9. Review Module
+Allows users to review and rate products.
+
+Post, edit, delete reviews
+
+Star-based rating system
+
+Admin moderation
+
+🧑‍💼 10. Admin Module
+Provides administrative controls over the platform.
+
+Dashboard & metrics
+
+Full CRUD over all entities
+
+System-wide settings
+
+🔔 11. Notification Module
+Sends user notifications via email or in-app.
+
+Order confirmations
+
+Shipping updates
+
+Password reset links
+
+💝 12. Wishlist Module
+Allows users to save favorite products.
+
+Add/remove from wishlist
+
+Fetch user's saved items
+
+🏷️ 13. Discount Module
+Manages coupons and promotional codes.
+
+Create and apply discount codes
+
+Usage limits and expiry dates
+
+📊 14. Analytics Module (Optional)
+Tracks platform statistics and user behavior.
+
+Sales metrics and charts
+
+Customer engagement data
+
+🧪 15. Testing Module
+Provides testing infrastructure using Jest.
+
+Unit and integration tests
+
+Test mocks and coverage
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
