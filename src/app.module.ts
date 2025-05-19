@@ -15,10 +15,24 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { CouponsModule } from './coupons/coupons.module';
 import { NotificationModule } from './notification/notification.module';
 import { CartModule } from './cart/cart.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [AuthModule, UsersModule, OrderModule, ShippingModule, ReviewsModule, PaymentsModule, ProductsModule, CategoriesModule, WishlistModule, CouponsModule, NotificationModule, CartModule],
+  imports: [
+    TypeOrmModule.forRoot({
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'root',
+    database: 'users',
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    synchronize: false,
+  }),
+    AuthModule, UsersModule, OrderModule, ShippingModule, ReviewsModule, PaymentsModule, ProductsModule, CategoriesModule, WishlistModule, CouponsModule, NotificationModule, CartModule],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
 })
+
+
 export class AppModule {}
