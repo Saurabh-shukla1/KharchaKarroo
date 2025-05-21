@@ -12,7 +12,7 @@ export class Address {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, (user) => user.addresses)
+  @ManyToOne(() => User)
   user: User;
 
   @Column()

@@ -13,7 +13,7 @@ export class Review {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, (user) => user.reviews)
+  @ManyToOne(() => User)
   user: User;
 
   @ManyToOne(() => Product, (product) => product.reviews)
