@@ -1,35 +1,63 @@
-import { User } from 'src/users/entities/user.entity';
 import {
+  Entity,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
+  UpdateDateColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 import { OrderItem } from './order-item.entity';
-import { Address } from 'src/shipping/entities/address.entity';
+import { ShippingAddress } from '../../shipping/entities/shipping-address.entity';
+
+export enum OrderStatus {
+  PENDING = 'pending',
+  PROCESSING = 'processing',
+  SHIPPED = 'shipped',
+  DELIVERED = 'delivered',
+  CANCELLED = 'cancelled',
+}
 
 @Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User)
-  user: User;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
-  items: OrderItem[];
-
-  @ManyToOne(() => Address)
-  shippingAddress: Address;
-
-  @Column('decimal')
+  @Column('decimal', { precision: 10, scale: 2 })
   totalAmount: number;
 
-  @Column({ default: 'pending' })
-  status: string;
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.PENDING,
+  })
+  status: OrderStatus;
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @ManyToOne(() => User, user => user.orders)
+  user: User;
+
+  @OneToMany(() => OrderItem, orderItem => orderItem.order)
+  items: OrderItem[];
+
+  @OneToOne(() => ShippingAddress)
+  @JoinColumn()
+  shippingAddress: ShippingAddress;
+
+  @Column('decimal', { precision: 10, scale: 2, default: 0 })
+  shippingCost: number;
+
+  @Column({ nullable: true })
+  trackingNumber: string;
+
+  @Column('jsonb', { nullable: true })
+  paymentDetails: Record<string, any>;
 }

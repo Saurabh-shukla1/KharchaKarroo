@@ -5,12 +5,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
-
-export enum UserRole {
-  CUSTOMER = 'customer',
-  ADMIN = 'admin',
-}
+import { Order } from '../../orders/entities/order.entity';
+import { UserRole } from '../enums/user-role.enum';
 
 @Entity('users')
 export class User {
@@ -56,8 +54,15 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.CUSTOMER })
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.CUSTOMER,
+  })
   role: UserRole;
+
+  @OneToMany(() => Order, order => order.user)
+  orders: Order[];
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);

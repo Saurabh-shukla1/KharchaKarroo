@@ -6,6 +6,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('reviews')
@@ -13,18 +14,21 @@ export class Review {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column('text')
+  comment: string;
+
+  @Column('int')
+  rating: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
   @ManyToOne(() => User)
   user: User;
 
   @ManyToOne(() => Product, (product) => product.reviews)
   product: Product;
-
-  @Column('int')
-  rating: number;
-
-  @Column('text')
-  comment: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
 }

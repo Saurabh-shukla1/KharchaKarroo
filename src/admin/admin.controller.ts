@@ -14,7 +14,7 @@ import { AdminUpdateUserDto } from './dto/admin-update-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { Roles } from './decorators/roles.decorator';
-import { UserRole } from '../users/entities/user.entity';
+import { UserRole } from '../users/enums/user-role.enum';
 
 @Controller('admin')
 export class AdminController {

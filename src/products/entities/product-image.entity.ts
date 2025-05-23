@@ -6,8 +6,26 @@ export class ProductImage {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string')
+  @Column('text')
   url: string;
+
+  @Column('text', { nullable: true })
+  thumbnailUrl: string;
+
+  @Column('text', { nullable: true })
+  altText: string;
+
+  @Column('int', { default: 0 })
+  displayOrder: number;
+
+  @Column('boolean', { default: false })
+  isDefault: boolean;
+
+  @Column('json', { nullable: true })
+  dimensions: {
+    width: number;
+    height: number;
+  };
 
   @ManyToOne(() => Product, (product) => product.images)
   product: Product;
